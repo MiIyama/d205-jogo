@@ -20,29 +20,37 @@ function embaralhar(lista) {
   
   let imagens = imagensSalvas.concat(imagensSalvas);
   
-  imagens = embaralhar(imagens);
-  
   for(let i = 0; i < cartas.length; i++){
-    cartas[i].style.backgroundImage = `url("imagens/${imagens[i]}")`;
-  }
-  
-  setTimeout(function(){
-    for(let carta of cartas){
-      carta.style.backgroundImage = 'url("imagens/fundo.png")';
-      carta.onclick = function(){
-
-        if(cartaVirada && cartaVirada.id !==carta.id){
-            set
-
-            
-        }
-        else{
-            carta.style.backgroundImage = `url("imagens/${imagens[Number(carta.id)]}")`;
-            cartaVirada = carta;
-
-        }
-
-
-        
+    for (let i = 0; i < cartas.length; i++) {
+      cartas[i].style.backgroundImage = `url("imagens/${imagens[i]}")`;
     }
-  }, 3000);
+    
+    setTimeout(function(){
+      for(let carta of cartas){
+    setTimeout(function () {
+      for (let carta of cartas) {
+        carta.style.backgroundImage = 'url("imagens/fundo.png")';
+        carta.onclick = function(){
+          console.log("clicou");
+        carta.onclick = function () {
+          carta.style.backgroundImage = `url("imagens/${imagens[Number(carta.id)]}")`;
+          carta.onclick = null;
+          if (cartaVirada && cartaVirada.id !== carta.id) {
+            setTimeout(function () {
+              if (cartaVirada.style.backgroundImage === carta.style.backgroundImage) {
+                cartaVirada.onclick = null;
+                carta.onclick = null;
+              }
+              else {
+                carta.style.backgroundImage = 'url("imagens/fundo.png")';
+                cartaVirada.style.backgroundImage = 'url("imagens/fundo.png")';
+              }
+              cartaVirada = null;
+            }, 1500)
+          }
+          else {
+            cartaVirada = carta;
+          }
+        }
+      }
+    }, 3000);
